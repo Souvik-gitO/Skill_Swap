@@ -10,27 +10,31 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: rgb(226, 233, 238);
+    background-color: #e9e3ef;
     color: #1e293b;
     
 }
 
 /* Navigation bar */
+
+
+/* Navigation bar */
 .navbar {
-    background: #032f3c;
-    padding: 20px 6%;
+    background: #452C79;
+    padding: 25px 6%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
+    flex-wrap: nowrap;
+    gap: 0;
 }
 
 .logo {
-    color: #2563eb;
+    color: white;
     font-size: 30px;
     font-weight: bold;
     text-decoration: none;
+    margin: 0;
 }
 
 .navbar a {
@@ -60,7 +64,7 @@ body {
 .button,
 button {
     display: inline-block;
-    background: #02474d;
+    background: #6944B8;
     color: white;
     padding: 12px 18px;
     border: none;
@@ -81,7 +85,7 @@ button {
 
 .form-box h2 {
     text-align: center;
-    color: #1d4ed8;
+    color: #6944B8;
 }
 
 .form-box input,
@@ -198,9 +202,17 @@ button {
 
 
 
-/* Navigation bar */
+/* Navigation bar shadow */
 .navbar {
     box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+}
+
+/* Navigation links stay on the right */
+.navbar > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
 }
 
 /* Navigation links */
@@ -210,9 +222,23 @@ button {
     padding: 10px 14px;
 }
 
-.navbar a:hover {
+.navbar > div a {
+    font-size: 18px;
+}
+
+/* Hover effect only for navigation links */
+.navbar > div a:hover {
     background: #e8efff;
     color: #2563eb;
+}
+
+/* Disable hover effect on logo and SkillSwap text */
+.navbar > .brand-mark:hover,
+.navbar > .logo:hover {
+    background: transparent;
+    color: white;
+    box-shadow: none;
+    transform: none;
 }
 
 /* Highlight Log Out */
@@ -253,7 +279,7 @@ button, .button, .post-skill-button, .navbar a {
 
 .stat-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.13);
+    box-shadow: 0 12px 28px rgba(146, 95, 199, 0.13);
     border-color: #bfdbfe;
 }
 
@@ -285,7 +311,7 @@ button, .button, .post-skill-button, .navbar a {
 
 .skill-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 20px #00000018;
+    box-shadow: 0 2px 7px #b5aec4;
 }
 
 .skill-card h3 {
@@ -308,7 +334,7 @@ button, .button, .post-skill-button, .navbar a {
 
 .skill-card a {
     display: inline-block;
-    background: #035c63;
+    background: #6944B8;
     color: white;
     padding: 9px 12px;
     margin: 6px 6px 0 0;
@@ -317,7 +343,7 @@ button, .button, .post-skill-button, .navbar a {
 }
 
 .skill-card a:hover {
-    background:  #334155;
+    background:  #482B87;
 }
 
 .skills-grid {
@@ -409,7 +435,7 @@ h2 {
     width: fit-content;
     margin: 25px auto;
     padding: 20px 24px;
-    background: #02474d;
+    background: #6944B8;
     color: white;
     text-decoration: none;
     font-weight: bold;
@@ -418,7 +444,7 @@ h2 {
 }
 
 .button-post-skill:hover {
-    background: #013337;
+    background: #59369F;
     color: white;
     transform: translateY(-3px);
 }
@@ -475,7 +501,7 @@ h2 {
 
 /* SkillSwap Footer */
 .site-footer {
-    background: #032f3c;
+    background: #280859 !important;
     color: #FFFFFF;
     text-align: center;
     padding: 30px 20px;
@@ -501,8 +527,71 @@ h2 {
     font-size: 14px;
 }
 
+/* Skill level badge position */
+.skill-card {
+    position: relative;
+}
+
+.skill-level {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Beginner - Green */
+.skill-level.beginner {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+/* Intermediate - Blue */
+.skill-level.intermediate {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    border: 1px solid #3b82f6;
+}
+
+/* Expert - Purple */
+.skill-level.expert {
+    background-color: #ede9fe;
+    color: #6d28d9;
+    border: 1px solid #8b5cf6;
+}
 
 
 
 
 
+/* 
+.container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 24px;
+    box-sizing: border-box;
+} */
+
+
+.brand-mark {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 14px 14px 14px 5px;
+
+    font-family: Georgia, serif !important;
+    font-size: 26px;
+    font-style: italic !important;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}

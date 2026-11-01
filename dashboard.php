@@ -21,10 +21,13 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $user = mysqli_fetch_assoc($result);
 
-// Get all skill posts
+
+
+
 
  // Get all skill posts
-$sql = "SELECT skills.*, users.name, users.email, users.phone
+$sql = "SELECT skills.*, users.name, users.email, users.phone,
+               users.skills AS student_skills
         FROM skills
         JOIN users ON skills.user_id = users.id
         ORDER BY skills.id DESC";
@@ -63,12 +66,14 @@ $totalListings = $row['total_count'];
 <html>
 <head>
     <title>Dashboard - SkillSwap</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
 <nav class="navbar">
-
+    
+        <span class="brand-mark">S</span>
     <a href="index.php" class="logo">SkillSwap</a>
 
     <div>
@@ -90,8 +95,6 @@ $totalListings = $row['total_count'];
 
 	<!--- Profile Part --->
 
-    
- 
 
 <div class="stats">
 
@@ -116,6 +119,17 @@ $totalListings = $row['total_count'];
         </p>
     </div>
 
+        <div class="stat-card">
+            <h3>Skills</h3>
+            <p class="profile-value">
+                <?php
+                    echo !empty($user['skills'])
+                        ? htmlspecialchars($user['skills'])
+                        : 'No skills added';
+                ?>
+            </p>
+        </div>
+
 </div>
 
 
@@ -137,7 +151,7 @@ $totalListings = $row['total_count'];
 
         
     </div>
-
+<!--- Post skill and Skill card part -->
     <a href="post_skill.php" class="button-post-skill">
         + Post a Skill Swap
     </a>
@@ -151,10 +165,39 @@ $totalListings = $row['total_count'];
 
         <?php while ($skill = mysqli_fetch_assoc($skills)) { ?>
 
-            
-        <div class="skill-card">
 
-   	 <h3>   
+    <?php
+$studentSkills = array_filter(
+    array_map(
+        'trim',
+        explode(',', $skill['student_skills'] ?? '')
+    ),
+    function ($item) {
+        return $item !== '';
+    }
+);
+
+$countSkills = count($studentSkills);
+
+if ($countSkills < 3) {
+    $level = "Beginner";
+    $levelClass = "beginner";
+} elseif ($countSkills < 6) {
+    $level = "Intermediate";
+    $levelClass = "intermediate";
+} else {
+    $level = "Expert";
+    $levelClass = "expert";
+}
+?>
+            
+    <div class="skill-card">
+    
+        <span class="skill-level <?php echo $levelClass; ?>">
+            <?php echo htmlspecialchars($level); ?>
+        </span>
+
+   	     <h3>   
              
        	 	<?php echo htmlspecialchars($skill['skill_to_teach']); ?>
             

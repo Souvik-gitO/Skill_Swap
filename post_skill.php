@@ -52,7 +52,7 @@ if (isset($_POST['post_skill'])) {
 <html>
 <head>
     <title>Post Skill Swap</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <style>
     .swap-symbol {
     display: block;
@@ -69,6 +69,7 @@ if (isset($_POST['post_skill'])) {
 <body>
 
 <nav class="navbar">
+    <span class="brand-mark">S</span>
     <a href="index.php" class="logo">SkillSwap</a>
 
     <div>
