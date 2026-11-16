@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
     $phone = trim($_POST['phone']);
+    $course = trim($_POST['course']);
     $skills = trim($_POST['skills']);
     $password = $_POST['password'];
     $confirm = $_POST['confirm_password'];
@@ -20,16 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (name, email, phone, skills, password)
-                VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (name, email, phone, course, skills, password)
+                VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "sssss", $name, $email, $phone, $skills, $hash);
+        mysqli_stmt_bind_param($stmt, "ssssss", $name, $email, $phone, $course, $skills, $hash);
 
-        if (mysqli_stmt_execute($stmt)) {
+         try {
+            mysqli_stmt_execute($stmt);
             header("Location: login.php");
             exit;
-        } else {
-            $message = "That email is already registered.";
+
+        } catch (mysqli_sql_exception $e) {
+            $message = "Email already exists. Please use another email.";
         }
     }
 }
@@ -128,12 +131,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		
 		<div class="field">
 		<label for="phone">
-                    Skills: 
+                    Skills
                 </label>
 
 		<input type="text" name="skills"
                placeholder="Enter Skills (e.g. HTML, CSS, PHP)"
                maxlength="255" required>
+
+		</div>
+
+
+        <div class="field">
+		<label for="course">
+                    Course Name 
+                </label>
+
+		<input type="text" name="course"
+               placeholder="Enter your Course Name"
+               maxlength="25" required>
 
 		</div>
 

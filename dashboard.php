@@ -26,7 +26,7 @@ $user = mysqli_fetch_assoc($result);
 
 
  // Get all skill posts
-$sql = "SELECT skills.*, users.name, users.email, users.phone,
+$sql = "SELECT skills.*, users.name, users.email, users.phone, users.course,
                users.skills AS student_skills
         FROM skills
         JOIN users ON skills.user_id = users.id

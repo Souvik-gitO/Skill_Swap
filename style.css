@@ -42,23 +42,7 @@ body {
     margin-right: 12px;
     color: white;
 }
-/*
- Home page 
-.home {
-    text-align: center;
-    padding: 90px 20px;
-}
 
-.home h1 {
-    color: #1d4ed8;
-    font-size: 38px;
-}
-
-.home p {
-    color: #64748b;
-    line-height: 1.6;
-}
-*/
 
 /* Buttons */
 .button,
@@ -189,7 +173,7 @@ button {
 
 
 
-/* ===== SkillSwap Dashboard Enhancements ===== */
+
 
 /* Smooth effects throughout the page */
 * {
