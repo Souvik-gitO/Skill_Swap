@@ -1,3 +1,31 @@
+<?php
+session_start();
+include "db.php";
+
+$message = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+
+    $sql = "SELECT id, password FROM users WHERE email = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    $user = mysqli_fetch_assoc($result);
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        header("Location: dashboard.php");
+        exit;
+    } else {
+        $message = "Invalid email or password.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +60,10 @@
         <p class="form-intro">
             Sign in to continue your skill-sharing journey.
         </p>
+
+        <?php if ($message) { ?>
+            <p style="color:#c0392b;"><?php echo htmlspecialchars($message); ?></p>
+        <?php } ?>
 
         <form action="login.php" method="post">
 
