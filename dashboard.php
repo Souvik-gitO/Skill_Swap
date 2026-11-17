@@ -26,8 +26,12 @@ $user = mysqli_fetch_assoc($result);
 
 
  // Get all skill posts
-$sql = "SELECT skills.*, users.name, users.email, users.phone, users.course,
-               users.skills AS student_skills
+$sql = "SELECT skills.*, users.name, users.email, users.phone,
+               users.course, users.skills AS student_skills,
+               (SELECT AVG(rating) FROM feedback
+                WHERE receiver_id = users.id) AS avg_rating,
+               (SELECT COUNT(*) FROM feedback
+                WHERE receiver_id = users.id) AS total_reviews
         FROM skills
         JOIN users ON skills.user_id = users.id
         ORDER BY skills.id DESC";
@@ -67,7 +71,7 @@ $totalListings = $row['total_count'];
 <head>
     <title>Dashboard - SkillSwap</title>
     <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -79,6 +83,7 @@ $totalListings = $row['total_count'];
     <div>
         <a href="dashboard.php">Dashboard</a>
         <a href="post_skill.php">Post Skill Swap</a>
+        <a href="feedback.php">Give Feedback</a>
         <a href="logout.php">Log out</a>
     </div>
 
@@ -205,9 +210,26 @@ if ($countSkills < 3) {
          
 
     		<p>
-        	<b>Student:</b>
-        	<?php echo htmlspecialchars($skill['name']); ?>
-   	 </p>
+        	    <b>Student:</b>
+        	    <?php echo htmlspecialchars($skill['name']); ?>
+   	        </p>
+
+                <p>
+            <b>Rating:</b> ⭐
+
+            <?php
+            if ($skill['total_reviews'] > 0) {
+                echo round($skill['avg_rating'], 1) . "/5";
+                echo " (" . $skill['total_reviews'] . " Reviews)";
+            } else {
+                echo "No ratings yet";
+            }
+            ?>
+        </p>
+
+        <a href="feedback.php?student_id=<?php echo $skill['user_id']; ?>#student-reviews" class="review-link">
+            View Reviews
+        </a>
 
     	<p>
         	<b>Wants to learn:</b>

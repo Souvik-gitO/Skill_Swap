@@ -579,3 +579,176 @@ h2 {
     font-weight: bold;
     color: white;
 }
+
+
+/* Feedback Page */
+.fb-container {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.fb-card {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px #0002;
+}
+
+.fb-card h2, .fb-subtitle {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.fb-card h2 { color: #452C79; }
+.fb-subtitle { color: gray; }
+
+.fb-group { margin-bottom: 20px; }
+
+.fb-group label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.fb-group input[type="email"],
+.fb-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.fb-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.fb-star-option {
+    cursor: pointer;
+}
+
+.fb-star-option input {
+    position: absolute;
+    opacity: 0;
+}
+
+.fb-star-option span {
+    font-size: 35px;
+    color: #ccc;
+}
+
+.fb-star-option:has(input:checked) span,
+.fb-star-option:has(input:checked) ~ .fb-star-option span,
+.fb-star-option:hover span,
+.fb-star-option:hover ~ .fb-star-option span {
+    color: orange;
+}
+
+.fb-submit {
+    width: 100%;
+    padding: 12px;
+    background: #6944B8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.fb-submit:hover { background: #452C79; }
+
+.fb-message {
+    text-align: center;
+    color: #452C79;
+}
+
+.fb-back {
+    display: inline-block;
+    color: #6944B8;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.fb-back:hover {
+    color: #452C79;
+}
+.skill-card a.review-link,
+.skill-card a.review-link:hover {
+    display: inline !important;
+    background: transparent !important;
+    color: #6944B8 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-decoration: underline !important;
+}
+/* Feedback page layout */
+.fb-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Feedback form */
+.fb-container > .fb-card:first-child {
+    width: 560px;
+    max-width: 95%;
+}
+
+/* Reviews section */
+.fb-container > .fb-card:last-child {
+    width: 100%;
+    max-width: 950px;
+}
+
+/* Review cards */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.review-box {
+    background: #f8f6fc;
+    border: 1px solid #e7dff2;
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.review-box h3 {
+    color: #452C79;
+    margin: 0 0 12px;
+}
+
+.review-box p {
+    margin: 10px 0;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.feedback-divider {
+    width: 100%;
+    max-width: 1057px;
+    height: 2px;
+    background-color: #6944B8;
+    border: none;
+    margin: 30px auto;
+    box-sizing: border-box;
+}
